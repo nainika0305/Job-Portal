@@ -24,6 +24,9 @@ const isAuthenticated = async (req, res, next) => {
 
         // Everything works, go to next 
         req.id = decode.userId;
+        req.role = decode.role;
+        console.log("AUTH MIDDLEWARE ROLE:", req.role);
+
         next();
     } catch (error) {
         console.log(error);

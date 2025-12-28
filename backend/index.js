@@ -5,6 +5,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
+import companyRoute from "./routes/company.route.js";
+import jobRoute from "./routes/job.route.js";
+import applicationRoute from "./routes/application.route.js";
 
 //connect to mongo db 
 dotenv.config();
@@ -32,20 +35,21 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// API's
+app.use("/api/v1/user", userRoute) // 3 apis .. login, register and update 
+app.use("/api/v1/company", companyRoute)
+app.use("/api/v1/job", jobRoute)
+app.use("/api/v1/application", applicationRoute)
+
+
 // CREATE SERVER 
 // port and call back fxn
 // if no 8000 then 3000 chosen 
 const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-    console.log(`Server running at port ${PORT}`)
-})
-
-// API's
-app.use("/api/v1/user", userRoute) // 3 apis .. login, register and update 
-
 // connect to db.js 
-app.listen(PORT, () => {
-    connectDB();
-    console.log(`Server running at port ${PORT}`);
-})
 
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running at port ${PORT}`);
+    });
+});

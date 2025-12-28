@@ -1,8 +1,9 @@
 import express from "express";
 import { login, logout, register, updateProfile } from "../controllers/user.controller.js";
 import isAuthenticated from "../middleware/isAuthenticated.js";
+import authorizeRoles from "../middleware/authorizeRoles.js";
 
-const router = express.Router(); 3
+const router = express.Router();
 
 router.route("/register").post(register);
 router.route("/login").post(login);

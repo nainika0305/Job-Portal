@@ -100,7 +100,8 @@ export const login = async (req, res) => {
 
         // Generate token 
         const tokenData = {
-            userId: user._id
+            userId: user._id,
+            role: user.role
         }
         const token = await jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
 
@@ -116,7 +117,7 @@ export const login = async (req, res) => {
 
         // Store the token in cookie 
         // token name, token and time in ms, only on
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' }).json({
             message: `Welcome back ${user.fullname}`,
             user,
             success: true
