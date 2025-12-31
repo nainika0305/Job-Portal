@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { USER_API_END_POINT } from '@/utils/constant'
+import { setUser } from '@/redux/authSlice'
 import { toast } from 'sonner'
 
 const Navbar = () => {
@@ -14,6 +15,8 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
+    // LOGOUT LOGIC 
     const logoutHandler = async () => {
         try {
             const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
@@ -27,6 +30,8 @@ const Navbar = () => {
             toast.error(error.response.data.message);
         }
     }
+
+    // GENERAL NAVBAR
     return (
         <div className='bg-white'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>

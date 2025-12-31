@@ -19,10 +19,9 @@ export const register = async (req, res) => {
             });
         };
 
-
-        //const file = req.file;
-        //const fileUri = getDataUri(file);
-        //const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         // check user doesnt already exist 
         const user = await User.findOne({ email });
@@ -43,9 +42,9 @@ export const register = async (req, res) => {
             phoneNumber,
             password: hashedPassword,
             role,
-            //profile: {
-            //    profilePhoto: cloudResponse.secure_url,
-            //}
+            profile: {
+                profilePhoto: cloudResponse.secure_url,
+            }
         });
 
         // Account created msg 
@@ -153,8 +152,8 @@ export const updateProfile = async (req, res) => {
         };
 
         // cloudinary 
-        // const fileUri = getDataUri(file);
-        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         // convert string skills to array 
         let skillsArray;
@@ -180,10 +179,10 @@ export const updateProfile = async (req, res) => {
         if (skills) user.profile.skills = skillsArray
 
         // resume 
-        //if (cloudResponse) {
-        //    user.profile.resume = cloudResponse.secure_url // save the cloudinary url
-        //    user.profile.resumeOriginalName = file.originalname // Save the original file name
-        //}
+        if (cloudResponse) {
+            user.profile.resume = cloudResponse.secure_url // Save cloudinary url
+            user.profile.resumeOriginalName = file.originalname // Save the original file name
+        }
 
         // Save changesc 
         await user.save();

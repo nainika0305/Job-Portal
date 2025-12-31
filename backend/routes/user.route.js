@@ -11,6 +11,6 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 
 // to ensure only authenticated ppl access the update, we make middleware 
-router.route("/profile/update").post(isAuthenticated, updateProfile);
+router.route("/profile/update").post(isAuthenticated, singleUpload, updateProfile);
 
 export default router;
