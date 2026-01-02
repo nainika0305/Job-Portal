@@ -1,4 +1,4 @@
-import { setSingleCompany } from '@/redux/companySlice'
+import { setSingleCompany } from '@/redux/CompanySlice'
 import { setAllJobs } from '@/redux/jobSlice'
 import { COMPANY_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
