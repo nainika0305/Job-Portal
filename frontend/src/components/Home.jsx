@@ -9,9 +9,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-    useGetAllJobs();
-
-    // if recruiter then go to company page directly
+    //useGetAllJobs();
     const { user } = useSelector(store => store.auth);
     const navigate = useNavigate();
     useEffect(() => {
@@ -30,4 +28,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Home

@@ -45,7 +45,6 @@ const Login = () => {
             console.log(error);
             toast.error(error.response.data.message);
         } finally {
-            //always run .. we want loading 
             dispatch(setLoading(false));
         }
     }
